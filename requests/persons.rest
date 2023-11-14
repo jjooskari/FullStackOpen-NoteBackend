@@ -7,4 +7,14 @@ GET http://localhost:3001/api/persons
 
 DELETE http://localhost:3001/api/persons/3
 
+###
+
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Arto Hellasvuo",
+    "number": "040-12345678"
+}
+
 
