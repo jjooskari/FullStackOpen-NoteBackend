@@ -11,6 +11,9 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :b
 const cors = require('cors')
 app.use('/api/persons', cors())
 
+//Serve static files from the React app
+app.use(express.static('dist'))
+
 let persons = [
     { 
       "id": 1,
