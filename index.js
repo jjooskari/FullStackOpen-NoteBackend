@@ -48,6 +48,8 @@ app.post('/api/persons/', (request, response) => {
         })
     }
 
+    // Does not check (yet) for duplicate names
+
     const person = new Person({
         name: body.name,
         number: body.number
