@@ -21,4 +21,13 @@ Content-Type: application/json
     "number": "040-12345678"
 }
 
+###
+
+PUT http://localhost:3001/api/persons/65562df4aa5da78af27a69f2
+Content-Type: application/json
+
+{
+    "name": "awawd",
+    "number": "awdawdwad"
+}
 

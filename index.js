@@ -33,7 +33,7 @@ app.get('/api/persons/:id', (request, response) => {
     })
 })
 
-app.delete('/api/persons/:id', (request, response, next) => { // Modify this to use Mongo
+app.delete('/api/persons/:id', (request, response, next) => {
     Person.findByIdAndDelete(request.params.id)
     .then(result => {
         response.status(204).end()
@@ -61,6 +61,30 @@ app.post('/api/persons/', (request, response) => {
         response.json(savedPerson)
     })
 })
+
+app.put('/api/persons/:id', (request, response, next) => {
+    const body = request.body
+
+    const person = {
+        name: body.name,
+        number: body.number
+    }
+
+    console.log(request.params.id)
+    console.log(person)
+
+    Person.findByIdAndUpdate(request.params.id, person, { new: true })
+    .then(updatedPerson => {
+        response.json(updatedPerson)
+    })
+    .catch(error => next(error))
+})
+
+const unknownEndpoint = (request, response) => {
+    response.status(404).send({ error: 'unknown endpoint' })
+1}
+  
+app.use(unknownEndpoint)
 
 const errorHandler = (error, request, response, next) => {
     console.error(error.message)
