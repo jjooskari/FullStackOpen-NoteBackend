@@ -18,7 +18,8 @@ app.use(express.static('dist'))
 
 app.get('/info', (request, response) => {
     const timeStamp = new Date()
-    response.send(`<p>Phonebook has info for ${persons.length} people</p><p>${timeStamp}</p>`)
+    const length = Person.length
+    response.send(`<p>Phonebook has info for ${length} people</p><p>${timeStamp}</p>`)
 })
 
 app.get('/api/persons', (request, response) => {
