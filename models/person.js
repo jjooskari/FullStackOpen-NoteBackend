@@ -14,13 +14,28 @@ mongoose.connect(url)
     console.log('error connecting to MongoDB:', error.message)
   })
 
+// Add a validator so that the number has two parts that are 
+// separated by -, the first part has two or three numbers and 
+// the second part also consists of numbers eg. 09-1234556 and 
+// 040-22334455 are valid phone numbers eg. 1234556, 1-22334455 
+// and 10-22-334455 are invalid
 const personSchema = new mongoose.Schema({
   name: {
     type: String,
     minLength: 3,
     required: true
   },
-  number: String,
+  number: {
+    type: String,
+    minLength: 8,
+    required: true,
+    validate: {
+      validator: function(v) {
+        return /\d{2,3}-\d{3,}/.test(v)
+      },
+      message: props => `${props.value} is not a valid phone number!`
+    }
+  }
 })
 
 personSchema.set('toJSON', {
